@@ -146,7 +146,24 @@ Pending
 ### 12. Automatic Estimation of Basals, ISF and Carb Ratio
 
 Pending
+
+<br/>
+
+### 13. POD Placement History
+
+When adding a new pump, the applied location on the users body can be recorded by clicking on front/back body images with recommended amd historical positions.
+
+<br/>
+
+### 14. Eventstream
+
+In addition to Nightscout, events and data can be streamed to a message queue for external realtime processing.
+ - Kafka?
+ - AWS SQS?
+ - GCP Pub/Sub?
+
 <br/><br/>
+
 
 ## Installation
 
