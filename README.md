@@ -15,8 +15,6 @@ For some of these extensions, the objective is to help towards providing a "one-
 
 <img src="docs/img/loop_icon.png" width="80">
 
-<br/>
-
 Built for: <b><font size="5">Loop v3.4.4 </font></b> 
 
 <br/>
