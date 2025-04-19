@@ -13,13 +13,16 @@ For some of these extensions, the objective is to help towards providing a "one-
 
 <br/><br/>
 
-<img src="docs/img/loop_icon.png" width="80"><br/>
+<img src="docs/img/loop_icon.png" width="80">
+
+<br/>
 
 Built for: <b><font size="5">Loop v3.4.4 </font></b> 
 
 <br/>
 
 ![Static Badge](https://img.shields.io/badge/Extension_Status-DRAFT-blue)
+
 ***NOTE: ALL CODE IN THIS REPO IS CURRENT IN DRAFT***
 As extensions are added and confirmed "ready", this will be shown on this page.
 
