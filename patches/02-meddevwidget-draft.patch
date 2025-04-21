@@ -1,0 +1,1099 @@
+diff --git a/Loop.xcodeproj/project.pbxproj b/Loop.xcodeproj/project.pbxproj
+index 11819516..9d2ef539 100644
+--- a/Loop.xcodeproj/project.pbxproj
++++ b/Loop.xcodeproj/project.pbxproj
+@@ -3,7 +3,7 @@
+ 	archiveVersion = 1;
+ 	classes = {
+ 	};
+-	objectVersion = 54;
++	objectVersion = 70;
+ 	objects = {
+ 
+ /* Begin PBXBuildFile section */
+@@ -401,6 +401,9 @@
+ 		B4E96D5D248A82A2002DABAD /* StatusBarHUDView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E96D5C248A82A2002DABAD /* StatusBarHUDView.xib */; };
+ 		B4F3D25124AF890C0095CE44 /* BluetoothStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F3D25024AF890C0095CE44 /* BluetoothStateManager.swift */; };
+ 		B4FEEF7D24B8A71F00A8DF9B /* DeviceDataManager+DeviceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FEEF7C24B8A71F00A8DF9B /* DeviceDataManager+DeviceStatus.swift */; };
++		B5FF65232DB4EB3F00DE312A /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B1735D28AED9EC006CCD7C /* WidgetKit.framework */; };
++		B5FF65242DB4EB3F00DE312A /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B1735F28AED9EC006CCD7C /* SwiftUI.framework */; };
++		B5FF652F2DB4EB4000DE312A /* MedicalDeviceLockScrWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B5FF65222DB4EB3F00DE312A /* MedicalDeviceLockScrWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+ 		C1004DF22981F5B700B8CF94 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1004DF02981F5B700B8CF94 /* InfoPlist.strings */; };
+ 		C1004DF52981F5B700B8CF94 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1004DF32981F5B700B8CF94 /* Localizable.strings */; };
+ 		C1004DF82981F5B700B8CF94 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1004DF62981F5B700B8CF94 /* InfoPlist.strings */; };
+@@ -632,6 +635,13 @@
+ 			remoteGlobalIDString = 4F75288A1DFE1DC600C322D6;
+ 			remoteInfo = LoopUI;
+ 		};
++		B5FF652D2DB4EB4000DE312A /* PBXContainerItemProxy */ = {
++			isa = PBXContainerItemProxy;
++			containerPortal = 43776F841B8022E90074EA36 /* Project object */;
++			proxyType = 1;
++			remoteGlobalIDString = B5FF65212DB4EB3F00DE312A;
++			remoteInfo = MedicalDeviceLockScrWidgetExtension;
++		};
+ 		C117ED70232EDB3200DA57CD /* PBXContainerItemProxy */ = {
+ 			isa = PBXContainerItemProxy;
+ 			containerPortal = 43776F841B8022E90074EA36 /* Project object */;
+@@ -724,6 +734,7 @@
+ 			files = (
+ 				14B1736928AED9EE006CCD7C /* Loop Widget Extension.appex in Embed App Extensions */,
+ 				E9B07F94253BBA6500BAD8F8 /* Loop Intent Extension.appex in Embed App Extensions */,
++				B5FF652F2DB4EB4000DE312A /* MedicalDeviceLockScrWidgetExtension.appex in Embed App Extensions */,
+ 				4F70C1E81DE8DCA7006380B7 /* Loop Status Extension.appex in Embed App Extensions */,
+ 			);
+ 			name = "Embed App Extensions";
+@@ -1325,6 +1336,7 @@
+ 		B4E96D5C248A82A2002DABAD /* StatusBarHUDView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusBarHUDView.xib; sourceTree = "<group>"; };
+ 		B4F3D25024AF890C0095CE44 /* BluetoothStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothStateManager.swift; sourceTree = "<group>"; };
+ 		B4FEEF7C24B8A71F00A8DF9B /* DeviceDataManager+DeviceStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeviceDataManager+DeviceStatus.swift"; sourceTree = "<group>"; };
++		B5FF65222DB4EB3F00DE312A /* MedicalDeviceLockScrWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MedicalDeviceLockScrWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+ 		C1004DEF2981F5B700B8CF94 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+ 		C1004DF12981F5B700B8CF94 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+ 		C1004DF42981F5B700B8CF94 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
+@@ -1717,6 +1729,20 @@
+ 		F5E0BDE327E1D7230033557E /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+ /* End PBXFileReference section */
+ 
++/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
++		B5FF65322DB4EB4000DE312A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
++			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
++			membershipExceptions = (
++				Info.plist,
++			);
++			target = B5FF65212DB4EB3F00DE312A /* MedicalDeviceLockScrWidgetExtension */;
++		};
++/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
++
++/* Begin PBXFileSystemSynchronizedRootGroup section */
++		B5FF65252DB4EB3F00DE312A /* MedicalDeviceLockScrWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (B5FF65322DB4EB4000DE312A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = MedicalDeviceLockScrWidget; sourceTree = "<group>"; };
++/* End PBXFileSystemSynchronizedRootGroup section */
++
+ /* Begin PBXFrameworksBuildPhase section */
+ 		14B1735928AED9EC006CCD7C /* Frameworks */ = {
+ 			isa = PBXFrameworksBuildPhase;
+@@ -1816,6 +1842,15 @@
+ 			);
+ 			runOnlyForDeploymentPostprocessing = 0;
+ 		};
++		B5FF651F2DB4EB3F00DE312A /* Frameworks */ = {
++			isa = PBXFrameworksBuildPhase;
++			buildActionMask = 2147483647;
++			files = (
++				B5FF65242DB4EB3F00DE312A /* SwiftUI.framework in Frameworks */,
++				B5FF65232DB4EB3F00DE312A /* WidgetKit.framework in Frameworks */,
++			);
++			runOnlyForDeploymentPostprocessing = 0;
++		};
+ 		E9B07F79253BBA6500BAD8F8 /* Frameworks */ = {
+ 			isa = PBXFrameworksBuildPhase;
+ 			buildActionMask = 2147483647;
+@@ -1980,6 +2015,7 @@
+ 				E9B07F7D253BBA6500BAD8F8 /* Loop Intent Extension */,
+ 				14B1736128AED9EC006CCD7C /* Loop Widget Extension */,
+ 				A900531928D60852000BC15B /* Shortcuts */,
++				B5FF65252DB4EB3F00DE312A /* MedicalDeviceLockScrWidget */,
+ 				968DCD53F724DE56FFE51920 /* Frameworks */,
+ 				43776F8D1B8022E90074EA36 /* Products */,
+ 				437D9BA11D7B5203007245E8 /* Loop.xcconfig */,
+@@ -2000,6 +2036,7 @@
+ 				43D9002A21EB209400AF44BF /* LoopCore.framework */,
+ 				E9B07F7C253BBA6500BAD8F8 /* Loop Intent Extension.appex */,
+ 				14B1735C28AED9EC006CCD7C /* Loop Widget Extension.appex */,
++				B5FF65222DB4EB3F00DE312A /* MedicalDeviceLockScrWidgetExtension.appex */,
+ 			);
+ 			name = Products;
+ 			sourceTree = "<group>";
+@@ -3018,6 +3055,7 @@
+ 				43D9FFD521EAE05D00AF44BF /* PBXTargetDependency */,
+ 				E9B07F93253BBA6500BAD8F8 /* PBXTargetDependency */,
+ 				14B1736828AED9EE006CCD7C /* PBXTargetDependency */,
++				B5FF652E2DB4EB4000DE312A /* PBXTargetDependency */,
+ 			);
+ 			name = Loop;
+ 			packageProductDependencies = (
+@@ -3168,6 +3206,28 @@
+ 			productReference = 4F75288B1DFE1DC600C322D6 /* LoopUI.framework */;
+ 			productType = "com.apple.product-type.framework";
+ 		};
++		B5FF65212DB4EB3F00DE312A /* MedicalDeviceLockScrWidgetExtension */ = {
++			isa = PBXNativeTarget;
++			buildConfigurationList = B5FF65332DB4EB4000DE312A /* Build configuration list for PBXNativeTarget "MedicalDeviceLockScrWidgetExtension" */;
++			buildPhases = (
++				B5FF651E2DB4EB3F00DE312A /* Sources */,
++				B5FF651F2DB4EB3F00DE312A /* Frameworks */,
++				B5FF65202DB4EB3F00DE312A /* Resources */,
++			);
++			buildRules = (
++			);
++			dependencies = (
++			);
++			fileSystemSynchronizedGroups = (
++				B5FF65252DB4EB3F00DE312A /* MedicalDeviceLockScrWidget */,
++			);
++			name = MedicalDeviceLockScrWidgetExtension;
++			packageProductDependencies = (
++			);
++			productName = MedicalDeviceLockScrWidgetExtension;
++			productReference = B5FF65222DB4EB3F00DE312A /* MedicalDeviceLockScrWidgetExtension.appex */;
++			productType = "com.apple.product-type.app-extension";
++		};
+ 		E9B07F7B253BBA6500BAD8F8 /* Loop Intent Extension */ = {
+ 			isa = PBXNativeTarget;
+ 			buildConfigurationList = E9B07F9A253BBA6500BAD8F8 /* Build configuration list for PBXNativeTarget "Loop Intent Extension" */;
+@@ -3191,7 +3251,7 @@
+ 		43776F841B8022E90074EA36 /* Project object */ = {
+ 			isa = PBXProject;
+ 			attributes = {
+-				LastSwiftUpdateCheck = 1340;
++				LastSwiftUpdateCheck = 1620;
+ 				LastUpgradeCheck = 1010;
+ 				ORGANIZATIONNAME = "LoopKit Authors";
+ 				TargetAttributes = {
+@@ -3285,6 +3345,9 @@
+ 						LastSwiftMigration = 1020;
+ 						ProvisioningStyle = Automatic;
+ 					};
++					B5FF65212DB4EB3F00DE312A = {
++						CreatedOnToolsVersion = 16.2;
++					};
+ 					E9B07F7B253BBA6500BAD8F8 = {
+ 						ProvisioningStyle = Automatic;
+ 					};
+@@ -3340,6 +3403,7 @@
+ 				43D9001A21EB209400AF44BF /* LoopCore-watchOS */,
+ 				4F75288A1DFE1DC600C322D6 /* LoopUI */,
+ 				43E2D90A1D20C581004DA55F /* LoopTests */,
++				B5FF65212DB4EB3F00DE312A /* MedicalDeviceLockScrWidgetExtension */,
+ 			);
+ 		};
+ /* End PBXProject section */
+@@ -3490,6 +3554,13 @@
+ 			);
+ 			runOnlyForDeploymentPostprocessing = 0;
+ 		};
++		B5FF65202DB4EB3F00DE312A /* Resources */ = {
++			isa = PBXResourcesBuildPhase;
++			buildActionMask = 2147483647;
++			files = (
++			);
++			runOnlyForDeploymentPostprocessing = 0;
++		};
+ 		E9B07F7A253BBA6500BAD8F8 /* Resources */ = {
+ 			isa = PBXResourcesBuildPhase;
+ 			buildActionMask = 2147483647;
+@@ -4094,6 +4165,13 @@
+ 			);
+ 			runOnlyForDeploymentPostprocessing = 0;
+ 		};
++		B5FF651E2DB4EB3F00DE312A /* Sources */ = {
++			isa = PBXSourcesBuildPhase;
++			buildActionMask = 2147483647;
++			files = (
++			);
++			runOnlyForDeploymentPostprocessing = 0;
++		};
+ 		E9B07F78253BBA6500BAD8F8 /* Sources */ = {
+ 			isa = PBXSourcesBuildPhase;
+ 			buildActionMask = 2147483647;
+@@ -4152,6 +4230,11 @@
+ 			target = 4F75288A1DFE1DC600C322D6 /* LoopUI */;
+ 			targetProxy = 4F7528961DFE1ED400C322D6 /* PBXContainerItemProxy */;
+ 		};
++		B5FF652E2DB4EB4000DE312A /* PBXTargetDependency */ = {
++			isa = PBXTargetDependency;
++			target = B5FF65212DB4EB3F00DE312A /* MedicalDeviceLockScrWidgetExtension */;
++			targetProxy = B5FF652D2DB4EB4000DE312A /* PBXContainerItemProxy */;
++		};
+ 		C117ED71232EDB3200DA57CD /* PBXTargetDependency */ = {
+ 			isa = PBXTargetDependency;
+ 			target = 43D9001A21EB209400AF44BF /* LoopCore-watchOS */;
+@@ -5506,6 +5589,103 @@
+ 			};
+ 			name = Release;
+ 		};
++		B5FF65302DB4EB4000DE312A /* Debug */ = {
++			isa = XCBuildConfiguration;
++			buildSettings = {
++				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
++				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
++				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
++				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
++				CLANG_ENABLE_OBJC_WEAK = YES;
++				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
++				CLANG_WARN_BOOL_CONVERSION = YES;
++				CLANG_WARN_COMMA = YES;
++				CLANG_WARN_CONSTANT_CONVERSION = YES;
++				CLANG_WARN_ENUM_CONVERSION = YES;
++				CLANG_WARN_INT_CONVERSION = YES;
++				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
++				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
++				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
++				CLANG_WARN_STRICT_PROTOTYPES = YES;
++				CLANG_WARN_UNREACHABLE_CODE = YES;
++				CODE_SIGN_IDENTITY = "$(LOOP_CODE_SIGN_IDENTITY_DEBUG)";
++				CODE_SIGN_STYLE = Automatic;
++				CURRENT_PROJECT_VERSION = 1;
++				DEVELOPMENT_TEAM = "$(LOOP_DEVELOPMENT_TEAM)";
++				ENABLE_USER_SCRIPT_SANDBOXING = YES;
++				GCC_C_LANGUAGE_STANDARD = gnu17;
++				GCC_DYNAMIC_NO_PIC = NO;
++				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
++				GENERATE_INFOPLIST_FILE = YES;
++				INFOPLIST_FILE = MedicalDeviceLockScrWidget/Info.plist;
++				INFOPLIST_KEY_CFBundleDisplayName = MedicalDeviceLockScrWidget;
++				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 LoopKit Authors. All rights reserved.";
++				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
++				LD_RUNPATH_SEARCH_PATHS = (
++					"$(inherited)",
++					"@executable_path/Frameworks",
++					"@executable_path/../../Frameworks",
++				);
++				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
++				MARKETING_VERSION = 1.0;
++				PRODUCT_BUNDLE_IDENTIFIER = com.KG962J83R6.loopkit.Loop.MedicalDeviceLockScrWidget;
++				PRODUCT_NAME = "$(TARGET_NAME)";
++				SKIP_INSTALL = YES;
++				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
++				SWIFT_EMIT_LOC_STRINGS = YES;
++				SWIFT_VERSION = 5.0;
++				TARGETED_DEVICE_FAMILY = "1,2";
++			};
++			name = Debug;
++		};
++		B5FF65312DB4EB4000DE312A /* Release */ = {
++			isa = XCBuildConfiguration;
++			buildSettings = {
++				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
++				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
++				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
++				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
++				CLANG_ENABLE_OBJC_WEAK = YES;
++				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
++				CLANG_WARN_BOOL_CONVERSION = YES;
++				CLANG_WARN_COMMA = YES;
++				CLANG_WARN_CONSTANT_CONVERSION = YES;
++				CLANG_WARN_ENUM_CONVERSION = YES;
++				CLANG_WARN_INT_CONVERSION = YES;
++				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
++				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
++				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
++				CLANG_WARN_STRICT_PROTOTYPES = YES;
++				CLANG_WARN_UNREACHABLE_CODE = YES;
++				CODE_SIGN_IDENTITY = "$(LOOP_CODE_SIGN_IDENTITY_RELEASE)";
++				CODE_SIGN_STYLE = Automatic;
++				CURRENT_PROJECT_VERSION = 1;
++				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
++				DEVELOPMENT_TEAM = "$(LOOP_DEVELOPMENT_TEAM)";
++				ENABLE_USER_SCRIPT_SANDBOXING = YES;
++				GCC_C_LANGUAGE_STANDARD = gnu17;
++				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
++				GENERATE_INFOPLIST_FILE = YES;
++				INFOPLIST_FILE = MedicalDeviceLockScrWidget/Info.plist;
++				INFOPLIST_KEY_CFBundleDisplayName = MedicalDeviceLockScrWidget;
++				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 LoopKit Authors. All rights reserved.";
++				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
++				LD_RUNPATH_SEARCH_PATHS = (
++					"$(inherited)",
++					"@executable_path/Frameworks",
++					"@executable_path/../../Frameworks",
++				);
++				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
++				MARKETING_VERSION = 1.0;
++				PRODUCT_BUNDLE_IDENTIFIER = com.KG962J83R6.loopkit.Loop.MedicalDeviceLockScrWidget;
++				PRODUCT_NAME = "$(TARGET_NAME)";
++				SKIP_INSTALL = YES;
++				SWIFT_EMIT_LOC_STRINGS = YES;
++				SWIFT_VERSION = 5.0;
++				TARGETED_DEVICE_FAMILY = "1,2";
++			};
++			name = Release;
++		};
+ 		E9B07F95253BBA6500BAD8F8 /* Debug */ = {
+ 			isa = XCBuildConfiguration;
+ 			buildSettings = {
+@@ -5653,6 +5833,15 @@
+ 			defaultConfigurationIsVisible = 0;
+ 			defaultConfigurationName = Release;
+ 		};
++		B5FF65332DB4EB4000DE312A /* Build configuration list for PBXNativeTarget "MedicalDeviceLockScrWidgetExtension" */ = {
++			isa = XCConfigurationList;
++			buildConfigurations = (
++				B5FF65302DB4EB4000DE312A /* Debug */,
++				B5FF65312DB4EB4000DE312A /* Release */,
++			);
++			defaultConfigurationIsVisible = 0;
++			defaultConfigurationName = Release;
++		};
+ 		E9B07F9A253BBA6500BAD8F8 /* Build configuration list for PBXNativeTarget "Loop Intent Extension" */ = {
+ 			isa = XCConfigurationList;
+ 			buildConfigurations = (
+diff --git a/MedicalDeviceLockScrWidget/Assets.xcassets/AccentColor.colorset/Contents.json b/MedicalDeviceLockScrWidget/Assets.xcassets/AccentColor.colorset/Contents.json
+new file mode 100644
+index 00000000..eb878970
+--- /dev/null
++++ b/MedicalDeviceLockScrWidget/Assets.xcassets/AccentColor.colorset/Contents.json
+@@ -0,0 +1,11 @@
++{
++  "colors" : [
++    {
++      "idiom" : "universal"
++    }
++  ],
++  "info" : {
++    "author" : "xcode",
++    "version" : 1
++  }
++}
+diff --git a/MedicalDeviceLockScrWidget/Assets.xcassets/AppIcon.appiconset/Contents.json b/MedicalDeviceLockScrWidget/Assets.xcassets/AppIcon.appiconset/Contents.json
+new file mode 100644
+index 00000000..23058801
+--- /dev/null
++++ b/MedicalDeviceLockScrWidget/Assets.xcassets/AppIcon.appiconset/Contents.json
+@@ -0,0 +1,35 @@
++{
++  "images" : [
++    {
++      "idiom" : "universal",
++      "platform" : "ios",
++      "size" : "1024x1024"
++    },
++    {
++      "appearances" : [
++        {
++          "appearance" : "luminosity",
++          "value" : "dark"
++        }
++      ],
++      "idiom" : "universal",
++      "platform" : "ios",
++      "size" : "1024x1024"
++    },
++    {
++      "appearances" : [
++        {
++          "appearance" : "luminosity",
++          "value" : "tinted"
++        }
++      ],
++      "idiom" : "universal",
++      "platform" : "ios",
++      "size" : "1024x1024"
++    }
++  ],
++  "info" : {
++    "author" : "xcode",
++    "version" : 1
++  }
++}
+diff --git a/MedicalDeviceLockScrWidget/Assets.xcassets/Contents.json b/MedicalDeviceLockScrWidget/Assets.xcassets/Contents.json
+new file mode 100644
+index 00000000..73c00596
+--- /dev/null
++++ b/MedicalDeviceLockScrWidget/Assets.xcassets/Contents.json
+@@ -0,0 +1,6 @@
++{
++  "info" : {
++    "author" : "xcode",
++    "version" : 1
++  }
++}
+diff --git a/MedicalDeviceLockScrWidget/Assets.xcassets/FirstAidKitEmoji.imageset/Contents.json b/MedicalDeviceLockScrWidget/Assets.xcassets/FirstAidKitEmoji.imageset/Contents.json
+new file mode 100644
+index 00000000..ef711f3a
+--- /dev/null
++++ b/MedicalDeviceLockScrWidget/Assets.xcassets/FirstAidKitEmoji.imageset/Contents.json
+@@ -0,0 +1,21 @@
++{
++  "images" : [
++    {
++      "filename" : "FirstAidKitEmoji.png",
++      "idiom" : "universal",
++      "scale" : "1x"
++    },
++    {
++      "idiom" : "universal",
++      "scale" : "2x"
++    },
++    {
++      "idiom" : "universal",
++      "scale" : "3x"
++    }
++  ],
++  "info" : {
++    "author" : "xcode",
++    "version" : 1
++  }
++}
+diff --git a/MedicalDeviceLockScrWidget/Assets.xcassets/FirstAidKitEmoji.imageset/FirstAidKitEmoji.png b/MedicalDeviceLockScrWidget/Assets.xcassets/FirstAidKitEmoji.imageset/FirstAidKitEmoji.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..34671aa37ddf9b61fa6d0029e4e8ffc63945f28c
+GIT binary patch
+literal 26070
+zcmeFZbySq$+ci3LNh2T~0)v2nf^?UHv~-u0bT<+Lk|Lq>ponyLH-dE63`oo%(lOL9
+z=i&Fh?^)}_I_v!N{r4@Y85YlT$93&%?|om7aatNG#DsK&AP|W7)k{Sk5D4S!{u3V;
+zcxQAT_7V7o;iaP@kFoTNHw<`zZ7-)T2Ljb36Wv<j0IykWUh1fWK!KbfP<RvwbPc=}
+zjsSst1VEs_mLQP$7Z8ZXJ*QP$68HtKwVH||2z~#rpriOR@D73dOCv83h=}t369bf$
+zLkql#=lx1u32zsh7>f_*r&rQAa1+ogMY%Wr%l|r@Q*0NEDz7RVE;#u0=4f8IrpOI0
+zQsT-dD6iAM=)b&NU$<VzruB;NS&zLE{Jn9>ARzEuQ2>`yLx7S2y`D@Efu$1uFRt4c
+zpW$M?`W@?N1~2;(3;Vk(&ZwHlO|$w22HP$c^Vd5=Q0Ik_HKX)7vvj@m^h3%|9Xxfl
+zrELb49nkZTy*5x3nLIx0|Nip7WDSO=Afnh?LdWZoq|m#|&E&A_{JY)!qkc-w^^)Se
+z<x`ZgGs!ZyvU6fBuXYAUj+ek-!ODK&%0AmGigtt&fA6UI#k1Rf&0FjRd3iamt>&wB
+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
+DPn8>S
+
+literal 0
+HcmV?d00001
+
+diff --git a/MedicalDeviceLockScrWidget/Assets.xcassets/WidgetBackground.colorset/Contents.json b/MedicalDeviceLockScrWidget/Assets.xcassets/WidgetBackground.colorset/Contents.json
+new file mode 100644
+index 00000000..eb878970
+--- /dev/null
++++ b/MedicalDeviceLockScrWidget/Assets.xcassets/WidgetBackground.colorset/Contents.json
+@@ -0,0 +1,11 @@
++{
++  "colors" : [
++    {
++      "idiom" : "universal"
++    }
++  ],
++  "info" : {
++    "author" : "xcode",
++    "version" : 1
++  }
++}
+diff --git a/MedicalDeviceLockScrWidget/Info.plist b/MedicalDeviceLockScrWidget/Info.plist
+new file mode 100644
+index 00000000..0f118fb7
+--- /dev/null
++++ b/MedicalDeviceLockScrWidget/Info.plist
+@@ -0,0 +1,11 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
++<plist version="1.0">
++<dict>
++	<key>NSExtension</key>
++	<dict>
++		<key>NSExtensionPointIdentifier</key>
++		<string>com.apple.widgetkit-extension</string>
++	</dict>
++</dict>
++</plist>
+diff --git a/MedicalDeviceLockScrWidget/MedicalDeviceLockScrWidget.swift b/MedicalDeviceLockScrWidget/MedicalDeviceLockScrWidget.swift
+new file mode 100644
+index 00000000..651aca68
+--- /dev/null
++++ b/MedicalDeviceLockScrWidget/MedicalDeviceLockScrWidget.swift
+@@ -0,0 +1,116 @@
++//
++//  MedicalDeviceLockScrWidget.swift
++//  MedicalDeviceLockScrWidget
++//
++//  Created by Ben Maguire on 20/4/2025.
++//  Copyright © 2025 LoopKit Authors. All rights reserved.
++//
++
++import WidgetKit
++import SwiftUI
++
++struct Provider: TimelineProvider {
++    func placeholder(in context: Context) -> SimpleEntry {
++        SimpleEntry(date: Date())
++    }
++
++    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
++        let entry = SimpleEntry(date: Date())
++        completion(entry)
++    }
++
++    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
++        var entries: [SimpleEntry] = []
++
++        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
++        let currentDate = Date()
++        for hourOffset in 0 ..< 5 {
++            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
++            let entry = SimpleEntry(date: entryDate)
++            entries.append(entry)
++        }
++
++        let timeline = Timeline(entries: entries, policy: .atEnd)
++        completion(timeline)
++    }
++}
++
++struct SimpleEntry: TimelineEntry {
++    let date: Date
++}
++
++
++struct MedicalDeviceLockScrWidgetEntryView : View {
++    var entry: Provider.Entry
++
++    var body: some View {
++        VStack {
++            Image("FirstAidKitEmoji")
++                .resizable()
++                .frame(width: 25, height: 35)
++            Text("MEDICAL DEVICE")
++                .font(.caption)
++                .bold()
++            Text("Type 1 Diabetic")
++                .font(.custom("SFUI-Regular", fixedSize: 10))
++                .foregroundColor(.gray)
++        }
++        .alignmentGuide(.customCenter) { context in
++          context.width / 4
++        }
++        
++    }
++}
++
++struct MedicalDeviceLockScrWidget: Widget {
++    let kind: String = "MedicalDeviceLockScrWidget"
++
++    var body: some WidgetConfiguration {
++        StaticConfiguration(kind: kind, provider: Provider()) { entry in
++            if #available(iOS 17.0, *) {
++                MedicalDeviceLockScrWidgetEntryView(entry: entry)
++                    .containerBackground(.fill.tertiary, for: .widget)
++            } else {
++                MedicalDeviceLockScrWidgetEntryView(entry: entry)
++                    .padding()
++                    .background()
++            }
++        }
++        
++        .supportedFamilies([
++            .systemSmall,
++            .accessoryInline,
++            .accessoryRectangular
++        ])
++        
++        .configurationDisplayName("Medical Device Label")
++        .description("This widget shows a label for your medical device")
++    }
++}
++
++#Preview(as: .systemSmall) {
++    MedicalDeviceLockScrWidget()
++} timeline: {
++    SimpleEntry(date: .now)
++}
++
++
++
++struct CustomCenter: AlignmentID {
++  static func defaultValue(in context: ViewDimensions) -> CGFloat {
++    context[HorizontalAlignment.center]
++  }
++}
++
++
++struct CustomRight: AlignmentID {
++  static func defaultValue(in context: ViewDimensions) -> CGFloat {
++      context[HorizontalAlignment.trailing]
++  }
++}
++
++extension HorizontalAlignment {
++    static let customCenter: HorizontalAlignment = .init(CustomCenter.self)
++    static let customRight: HorizontalAlignment = .init(CustomRight.self)
++}
++
+diff --git a/MedicalDeviceLockScrWidget/MedicalDeviceLockScrWidgetBundle.swift b/MedicalDeviceLockScrWidget/MedicalDeviceLockScrWidgetBundle.swift
+new file mode 100644
+index 00000000..fb85ad06
+--- /dev/null
++++ b/MedicalDeviceLockScrWidget/MedicalDeviceLockScrWidgetBundle.swift
+@@ -0,0 +1,17 @@
++//
++//  MedicalDeviceLockScrWidgetBundle.swift
++//  MedicalDeviceLockScrWidget
++//
++//  Created by Ben Maguire on 20/4/2025.
++//  Copyright © 2025 LoopKit Authors. All rights reserved.
++//
++
++import WidgetKit
++import SwiftUI
++
++@main
++struct MedicalDeviceLockScrWidgetBundle: WidgetBundle {
++    var body: some Widget {
++        MedicalDeviceLockScrWidget()
++    }
++}

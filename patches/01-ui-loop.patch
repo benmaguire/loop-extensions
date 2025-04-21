@@ -1,0 +1,513 @@
+diff --git a/Loop.xcodeproj/project.pbxproj b/Loop.xcodeproj/project.pbxproj
+index 11819516..4c642bfa 100644
+--- a/Loop.xcodeproj/project.pbxproj
++++ b/Loop.xcodeproj/project.pbxproj
+@@ -4993,7 +4993,7 @@
+ 				GCC_WARN_UNUSED_LABEL = YES;
+ 				GCC_WARN_UNUSED_PARAMETER = YES;
+ 				GCC_WARN_UNUSED_VARIABLE = YES;
+-				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
++				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+ 				LOCALIZED_STRING_MACRO_NAMES = (
+ 					NSLocalizedString,
+ 					CFLocalizedString,
+@@ -5103,7 +5103,7 @@
+ 				GCC_WARN_UNUSED_LABEL = YES;
+ 				GCC_WARN_UNUSED_PARAMETER = YES;
+ 				GCC_WARN_UNUSED_VARIABLE = YES;
+-				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
++				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+ 				LOCALIZED_STRING_MACRO_NAMES = (
+ 					NSLocalizedString,
+ 					CFLocalizedString,
+@@ -5138,6 +5138,7 @@
+ 				DEVELOPMENT_TEAM = "$(LOOP_DEVELOPMENT_TEAM)";
+ 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+ 				INFOPLIST_FILE = Loop/Info.plist;
++				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+ 				LD_RUNPATH_SEARCH_PATHS = (
+ 					"$(inherited)",
+ 					"@executable_path/Frameworks",
+@@ -5167,6 +5168,7 @@
+ 				DEVELOPMENT_TEAM = "$(LOOP_DEVELOPMENT_TEAM)";
+ 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+ 				INFOPLIST_FILE = Loop/Info.plist;
++				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+ 				LD_RUNPATH_SEARCH_PATHS = (
+ 					"$(inherited)",
+ 					"@executable_path/Frameworks",
+@@ -5474,6 +5476,7 @@
+ 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+ 				INFOPLIST_FILE = LoopUI/Info.plist;
+ 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
++				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+ 				LD_RUNPATH_SEARCH_PATHS = (
+ 					"$(inherited)",
+ 					"@executable_path/Frameworks",
+@@ -5494,6 +5497,7 @@
+ 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+ 				INFOPLIST_FILE = LoopUI/Info.plist;
+ 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
++				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+ 				LD_RUNPATH_SEARCH_PATHS = (
+ 					"$(inherited)",
+ 					"@executable_path/Frameworks",
+diff --git a/Loop/DerivedAssetsBase.xcassets/insulin.colorset/Contents.json b/Loop/DerivedAssetsBase.xcassets/insulin.colorset/Contents.json
+index b431287b..9b711cb9 100644
+--- a/Loop/DerivedAssetsBase.xcassets/insulin.colorset/Contents.json
++++ b/Loop/DerivedAssetsBase.xcassets/insulin.colorset/Contents.json
+@@ -3,7 +3,7 @@
+     {
+       "color" : {
+         "platform" : "ios",
+-        "reference" : "systemOrangeColor"
++        "reference" : "systemBlueColor"
+       },
+       "idiom" : "universal"
+     }
+diff --git a/Loop/DerivedAssetsBase.xcassets/warning.colorset/Contents.json b/Loop/DerivedAssetsBase.xcassets/warning.colorset/Contents.json
+index c26d0f7a..427ad7ac 100644
+--- a/Loop/DerivedAssetsBase.xcassets/warning.colorset/Contents.json
++++ b/Loop/DerivedAssetsBase.xcassets/warning.colorset/Contents.json
+@@ -5,9 +5,9 @@
+         "color-space" : "display-p3",
+         "components" : {
+           "alpha" : "1.000",
+-          "blue" : "0.269",
+-          "green" : "0.763",
+-          "red" : "0.917"
++          "blue" : "0.917",
++          "green" : "0.282",
++          "red" : "0.618"
+         }
+       },
+       "idiom" : "universal"
+@@ -20,8 +20,13 @@
+         }
+       ],
+       "color" : {
+-        "platform" : "ios",
+-        "reference" : "systemYellowColor"
++        "color-space" : "display-p3",
++        "components" : {
++          "alpha" : "1.000",
++          "blue" : "0.640",
++          "green" : "0.105",
++          "red" : "0.400"
++        }
+       },
+       "idiom" : "universal"
+     }
+diff --git a/Loop/View Controllers/StatusTableViewController.swift b/Loop/View Controllers/StatusTableViewController.swift
+index 6a4aadfc..29089e25 100644
+--- a/Loop/View Controllers/StatusTableViewController.swift	
++++ b/Loop/View Controllers/StatusTableViewController.swift	
+@@ -144,7 +144,7 @@ final class StatusTableViewController: LoopChartsTableViewController {
+ 
+         addScenarioStepGestureRecognizers()
+ 
+-        tableView.backgroundColor = .secondarySystemBackground
++        tableView.backgroundColor = .systemBackground
+     
+     }
+ 
+@@ -269,14 +269,42 @@ final class StatusTableViewController: LoopChartsTableViewController {
+ 
+     private func setupToolbarItems() {
+         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+-        let carbs = UIBarButtonItem(image: UIImage(named: "carbs"), style: .plain, target: self, action: #selector(userTappedAddCarbs))
+-        let bolus = UIBarButtonItem(image: UIImage(named: "bolus"), style: .plain, target: self, action: #selector(presentBolusScreen))
+-        let settings = UIBarButtonItem(image: UIImage(named: "settings"), style: .plain, target: self, action: #selector(onSettingsTapped))
++        
++        let buttonCarbs =  UIButton(type: .custom)
++            buttonCarbs.setImage(UIImage(named: "carbs"), for: .normal)
++            buttonCarbs.addTarget(self, action: #selector(userTappedAddCarbs), for: .touchUpInside)
++            buttonCarbs.frame = CGRect(x: 0, y: 0, width: 53, height: 53)
++            buttonCarbs.imageEdgeInsets = UIEdgeInsets.init(top: -1, left: 0, bottom: 1, right: 0)
++        let labelCarbs = UILabel(frame: CGRect(x: 0, y: 40, width: 53, height: 10))
++            labelCarbs.font = UIFont(name: "Arial-BoldMT", size: 8)
++            labelCarbs.text = "Food"
++            labelCarbs.textAlignment = .center
++            labelCarbs.textColor = .darkGray
++            labelCarbs.backgroundColor =  .clear
++            buttonCarbs.addSubview(labelCarbs)
++        let barButtonCarbs = UIBarButtonItem(customView: buttonCarbs)
++
++        let buttonSettings =  UIButton(type: .custom)
++            buttonSettings.setImage(UIImage(named: "settings"), for: .normal)
++            buttonSettings.addTarget(self, action: #selector(onSettingsTapped), for: .touchUpInside)
++            buttonSettings.frame = CGRect(x: 0, y: 0, width: 53, height: 53)
++            buttonSettings.imageEdgeInsets = UIEdgeInsets.init(top: -1, left: 0, bottom: 1, right: 0)
++        let labelSettings = UILabel(frame: CGRect(x: 0, y: 40, width: 53, height: 10))
++            labelSettings.font = UIFont(name: "Arial-BoldMT", size: 8)
++            labelSettings.text = "Settings"
++            labelSettings.textAlignment = .center
++            labelSettings.textColor = .darkGray
++            labelSettings.backgroundColor =  .clear
++            buttonSettings.addSubview(labelSettings)
++        let barButtonSettings = UIBarButtonItem(customView: buttonSettings)
++        
++        // TODO: Move bolus and replace centre icon with new menu view
++        let bolus = UIBarButtonItem(title: "Bolus", image: UIImage(named: "mainmenuicon_sm")?.withRenderingMode(.alwaysOriginal), target: self, action: #selector(presentBolusScreen))
+         
+         let preMeal = createPreMealButtonItem(selected: false, isEnabled: true)
+         let workout = createWorkoutButtonItem(selected: false, isEnabled: true)
+         toolbarItems = [
+-            carbs,
++            barButtonCarbs,
+             space,
+             preMeal,
+             space,
+@@ -284,24 +312,27 @@ final class StatusTableViewController: LoopChartsTableViewController {
+             space,
+             workout,
+             space,
+-            settings
++            barButtonSettings
+         ]
+     }
+         
+     private func updateToolbarItems() {
+         let isPumpOnboarded = onboardingManager.isComplete || deviceManager.pumpManager?.isOnboarded == true
+-
++        
+         toolbarItems![0].accessibilityLabel = NSLocalizedString("Add Meal", comment: "The label of the carb entry button")
+         toolbarItems![0].isEnabled = isPumpOnboarded
+-        toolbarItems![0].tintColor = UIColor.carbTintColor
++        //toolbarItems![0].tintColor = UIColor.carbTintColor
++        toolbarItems![0].tintColor = UIColor.darkGray
+         toolbarItems![4].accessibilityLabel = NSLocalizedString("Bolus", comment: "The label of the bolus entry button")
+         toolbarItems![4].isEnabled = isPumpOnboarded
+-        toolbarItems![4].tintColor = UIColor.insulinTintColor
++        //toolbarItems![4].tintColor = UIColor.insulinTintColor
+         toolbarItems![8].accessibilityLabel = NSLocalizedString("Settings", comment: "The label of the settings button")
+-        toolbarItems![8].tintColor = UIColor.secondaryLabel
+-        
++        //toolbarItems![8].tintColor = UIColor.secondaryLabel
++        toolbarItems![8].tintColor = UIColor.darkGray
+         toolbarItems![2] = createPreMealButtonItem(selected: preMealMode == true && preMealModeAllowed, isEnabled: preMealModeAllowed)
+         toolbarItems![6] = createWorkoutButtonItem(selected: workoutMode == true && workoutModeAllowed, isEnabled: workoutModeAllowed)
++        toolbarItems![2].tintColor = UIColor.darkGray
++        toolbarItems![6].tintColor = UIColor.darkGray
+     }
+ 
+     public var basalDeliveryState: PumpManagerStatus.BasalDeliveryState? = nil {
+@@ -1019,7 +1050,7 @@ final class StatusTableViewController: LoopChartsTableViewController {
+             func getTitleSubtitleCell() -> TitleSubtitleTableViewCell {
+                 let cell = tableView.dequeueReusableCell(withIdentifier: TitleSubtitleTableViewCell.className, for: indexPath) as! TitleSubtitleTableViewCell
+                 cell.selectionStyle = .none
+-                cell.backgroundColor = .secondarySystemBackground
++                cell.backgroundColor = .systemBackground
+                 cell.titleLabel.text = nil
+                 cell.subtitleLabel.text = nil
+                 cell.accessoryView = nil
+@@ -1037,15 +1068,15 @@ final class StatusTableViewController: LoopChartsTableViewController {
+                     switch override.context {
+                     case .preMeal:
+                         let symbolAttachment = NSTextAttachment()
+-                        symbolAttachment.image = UIImage(named: "Pre-Meal-symbol")?.withTintColor(.carbTintColor)
++                        symbolAttachment.image = UIImage(named: "Pre-Meal-symbol")?.withTintColor(.darkGray)
+ 
+                         let attributedString = NSMutableAttributedString(attachment: symbolAttachment)
+                         attributedString.append(NSAttributedString(string: NSLocalizedString(" Pre-meal Preset", comment: "Status row title for premeal override enabled (leading space is to separate from symbol)")))
+                         cell.titleLabel.attributedText = attributedString
+                     case .legacyWorkout:
+                         let symbolAttachment = NSTextAttachment()
+-                        symbolAttachment.image = UIImage(named: "workout-symbol")?.withTintColor(.glucoseTintColor)
+-
++                        symbolAttachment.image = UIImage(named: "workout-symbol")?.withTintColor(.darkGray)
++                        
+                         let attributedString = NSMutableAttributedString(attachment: symbolAttachment)
+                         attributedString.append(NSAttributedString(string: NSLocalizedString(" Workout Preset", comment: "Status row title for workout override enabled (leading space is to separate from symbol)")))
+                         cell.titleLabel.attributedText = attributedString
+@@ -1083,7 +1114,7 @@ final class StatusTableViewController: LoopChartsTableViewController {
+                     progressCell.totalUnits = dose.programmedUnits
+                     progressCell.tintColor = .insulinTintColor
+                     progressCell.deliveredUnits = bolusProgressReporter?.progress.deliveredUnits
+-                    progressCell.backgroundColor = .secondarySystemBackground
++                    progressCell.backgroundColor = .systemBackground
+                     return progressCell
+                 case .cancelingBolus:
+                     let cell = getTitleSubtitleCell()
+@@ -1432,7 +1463,20 @@ final class StatusTableViewController: LoopChartsTableViewController {
+     }
+ 
+     private func createPreMealButtonItem(selected: Bool, isEnabled: Bool) -> UIBarButtonItem {
+-        let item = UIBarButtonItem(image: UIImage.preMealImage(selected: selected), style: .plain, target: self, action: #selector(premealButtonTapped(_:)))
++        let buttonPreBolus =  UIButton(type: .custom)
++            buttonPreBolus.setImage(UIImage.preMealImage(selected: selected), for: .normal)
++            buttonPreBolus.addTarget(self, action: #selector(premealButtonTapped(_:)), for: .touchUpInside)
++            buttonPreBolus.frame = CGRect(x: 0, y: 0, width: 53, height: 53)
++            buttonPreBolus.imageEdgeInsets = UIEdgeInsets.init(top: -1, left: 0, bottom: 1, right: 0)
++        let labelPreBolus = UILabel(frame: CGRect(x: 0, y: 40, width: 53, height: 10))
++            labelPreBolus.font = UIFont(name: "Arial-BoldMT", size: 8)
++            labelPreBolus.text = "Pre-Bolus"
++            labelPreBolus.textAlignment = .center
++            labelPreBolus.textColor = .darkGray
++            labelPreBolus.backgroundColor =  .clear
++            buttonPreBolus.addSubview(labelPreBolus)
++        let item = UIBarButtonItem(customView: buttonPreBolus)
++        
+         item.accessibilityLabel = NSLocalizedString("Pre-Meal Targets", comment: "The label of the pre-meal mode toggle button")
+ 
+         if selected {
+@@ -1442,14 +1486,27 @@ final class StatusTableViewController: LoopChartsTableViewController {
+             item.accessibilityHint = NSLocalizedString("Enables", comment: "The action hint of the workout mode toggle button when disabled")
+         }
+ 
+-        item.tintColor = UIColor.carbTintColor
++        item.tintColor = UIColor.darkGray
+         item.isEnabled = isEnabled
+ 
+         return item
+     }
+     
+     private func createWorkoutButtonItem(selected: Bool, isEnabled: Bool) -> UIBarButtonItem {
+-        let item = UIBarButtonItem(image: UIImage.workoutImage(selected: selected), style: .plain, target: self, action: #selector(toggleWorkoutMode(_:)))
++        let buttonOverride =  UIButton(type: .custom)
++            buttonOverride.setImage(UIImage.workoutImage(selected: selected), for: .normal)
++            buttonOverride.addTarget(self, action: #selector(toggleWorkoutMode(_:)), for: .touchUpInside)
++            buttonOverride.frame = CGRect(x: 0, y: 0, width: 53, height: 53)
++            buttonOverride.imageEdgeInsets = UIEdgeInsets.init(top: -1, left: 0, bottom: 1, right: 0)
++        let labelOverride = UILabel(frame: CGRect(x: 0, y: 40, width: 53, height: 10))
++            labelOverride.font = UIFont(name: "Arial-BoldMT", size: 8)
++            labelOverride.text = "Overrides"
++            labelOverride.textAlignment = .center
++            labelOverride.textColor = .darkGray
++            labelOverride.backgroundColor =  .clear
++            buttonOverride.addSubview(labelOverride)
++        let item = UIBarButtonItem(customView: buttonOverride)
++        
+         item.accessibilityLabel = NSLocalizedString("Workout Targets", comment: "The label of the workout mode toggle button")
+ 
+         if selected {
+@@ -1459,7 +1516,7 @@ final class StatusTableViewController: LoopChartsTableViewController {
+             item.accessibilityHint = NSLocalizedString("Enables", comment: "The action hint of the workout mode toggle button when disabled")
+         }
+ 
+-        item.tintColor = UIColor.glucoseTintColor
++        item.tintColor = UIColor.darkGray
+         item.isEnabled = isEnabled
+ 
+         return item
+diff --git a/Loop/Views/SettingsView.swift b/Loop/Views/SettingsView.swift
+index c3ec98b8..21790b71 100644
+--- a/Loop/Views/SettingsView.swift
++++ b/Loop/Views/SettingsView.swift
+@@ -6,6 +6,7 @@
+ //  Copyright © 2020 LoopKit Authors. All rights reserved.
+ //
+ 
++import Foundation
+ import LoopKit
+ import LoopKitUI
+ import MockKit
+@@ -70,10 +71,13 @@ public struct SettingsView: View {
+         NavigationView {
+             List {
+                 Group {
++                    loopCustomSectionIcon
++                    loopCustomSection
+                     loopSection
+                     if versionUpdateViewModel.softwareUpdateAvailable {
+                         softwareUpdateSection
+                     }
++                    loopExpFeaturesSection
+                     if FeatureFlags.automaticBolusEnabled {
+                         dosingStrategySection
+                     }
+@@ -187,6 +191,15 @@ public struct SettingsView: View {
+             set: { self.viewModel.closedLoopPreference = $0 }
+         )
+     }
++    
++    
++    private var expfeatDrivingToggleState: Binding<Bool> {
++        Binding(
++            get: { true },
++            set: { _ = $0 }
++        )
++    }
++    
+ }
+ 
+ extension String: Identifiable {
+@@ -215,6 +228,108 @@ extension SettingsView {
+         }
+     }
+     
++    private var loopCustomSectionIcon: some View {
++        Section (header: Image("customlogo").resizable()
++            .frame(width: 100, height: 100)) {
++        }
++    }
++    
++    var buildDate: Date {
++        if let infoPath = Bundle.main.path(forResource: "Info", ofType: "plist"),
++            let infoAttr = try? FileManager.default.attributesOfItem(atPath: infoPath),
++            let infoDate = infoAttr[.modificationDate] as? Date {
++            return infoDate
++        }
++        return Date()
++    }
++    
++    var buildDateString: String {
++        let dateFormatter = DateFormatter()
++        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
++        return dateFormatter.string(from: buildDate)
++    }
++    
++    private var loopCustomSection: some View {
++        Section () {
++            VStack(alignment: .leading) {
++                Text(localizedAppNameAndVersion)
++                    .foregroundColor(Color.black)
++                    .bold()
++                Text("\nCustom Build")
++                    .foregroundColor(Color.black)
++                Text(buildDateString)
++                    .fontWeight(.light)
++                    .foregroundColor(Color.black)
++                Text("\ngithub.com/benmaguire\n")
++                    .foregroundColor(Color.black)
++                Text("Features:")
++                    .foregroundColor(Color.black)
++                    .bold()
++                Text("-")
++                    .foregroundColor(Color.black)
++            }
++        }
++    }
++    
++    
++    private var loopExpFeaturesSection: some View {
++        Section (header: Text("Experimental Features")) {
++            Toggle(isOn: closedLoopToggleState) {
++                VStack(alignment: .leading) {
++                    Text("Driving Detection", comment: "The title text for enabling driver detection")
++                        .padding(.vertical, 3)
++                    
++                }
++                .fixedSize(horizontal: false, vertical: true)
++            }
++            
++            NavigationLink(destination: viewModel.versionUpdateViewModel.softwareUpdateView) {
++                Text(NSLocalizedString("Manual Insulin - NovoPen NFC", comment: "NFC pen scan"))
++                Spacer()
++                viewModel.versionUpdateViewModel.icon
++            }
++            
++            NavigationLink(destination: viewModel.versionUpdateViewModel.softwareUpdateView) {
++                Text(NSLocalizedString("Food v2", comment: "Food v2"))
++                Spacer()
++                viewModel.versionUpdateViewModel.icon
++            }
++            
++            NavigationLink(destination: viewModel.versionUpdateViewModel.softwareUpdateView) {
++                Text(NSLocalizedString("Advanced Rerporting", comment: "Full Medical Reports"))
++                Spacer()
++                viewModel.versionUpdateViewModel.icon
++            }
++            
++            NavigationLink(destination: viewModel.versionUpdateViewModel.softwareUpdateView) {
++                Text(NSLocalizedString("Key Metrics", comment: "Metrics"))
++                Spacer()
++                viewModel.versionUpdateViewModel.icon
++            }
++            
++            NavigationLink(destination: viewModel.versionUpdateViewModel.softwareUpdateView) {
++                Text(NSLocalizedString("Medical Appointments", comment: "Calendar"))
++                Spacer()
++                viewModel.versionUpdateViewModel.icon
++            }
++            
++            NavigationLink(destination: viewModel.versionUpdateViewModel.softwareUpdateView) {
++                Text(NSLocalizedString("Upload Test Results", comment: "OCR Test Results"))
++                Spacer()
++                viewModel.versionUpdateViewModel.icon
++            }
++            
++            NavigationLink(destination: viewModel.versionUpdateViewModel.softwareUpdateView) {
++                Text(NSLocalizedString("QR Scan Food Item", comment: "Food Item"))
++                Spacer()
++                viewModel.versionUpdateViewModel.icon
++            }
++            
++                
++        }
++    }
++
++    
+     private var loopSection: some View {
+         Section(header: SectionHeader(label: localizedAppNameAndVersion)) {
+             Toggle(isOn: closedLoopToggleState) {
+diff --git a/LoopUI/Extensions/UIColor.swift b/LoopUI/Extensions/UIColor.swift
+index db638084..e446245a 100644
+--- a/LoopUI/Extensions/UIColor.swift
++++ b/LoopUI/Extensions/UIColor.swift
+@@ -6,22 +6,25 @@
+ //  Copyright © 2016 Nathan Racklyeft. All rights reserved.
+ //
+ 
++import SwiftUI
+ import UIKit
+ 
+ // MARK: - Color palette for common elements
+ extension UIColor {
+     @nonobjc static let carbs = UIColor(named: "carbs") ?? systemGreen
+     
+-    @nonobjc static let fresh = UIColor(named: "fresh") ?? HIGGreenColor()
++    //@nonobjc static let fresh = UIColor(named: "fresh") ?? HIGGreenColor()
++    
++    @nonobjc static let fresh = UIColor(named: "fresh") ?? systemBlue //LinearGradient(colors: [.orange, .red], startPoint: .top, endPoint: .center)
+ 
+     @nonobjc static let glucose = UIColor(named: "glucose") ?? systemTeal
+     
+-    @nonobjc static let insulin = UIColor(named: "insulin") ?? systemOrange
++    @nonobjc static let insulin = UIColor(named: "insulin") ?? systemIndigo
+ 
+     // The loopAccent color is intended to be use as the app accent color.
+     @nonobjc public static let loopAccent = UIColor(named: "accent") ?? systemBlue
+     
+-    @nonobjc public static let warning = UIColor(named: "warning") ?? systemYellow
++    @nonobjc public static let warning = UIColor(named: "warning") ?? systemPurple
+ }
+ 
+ // MARK: - Context for colors
+@@ -32,7 +35,8 @@ extension UIColor {
+     
+     @nonobjc public static let axisLineColor = clear
+     
+-    @nonobjc public static let cellBackgroundColor = secondarySystemBackground
++    //@nonobjc public static let cellBackgroundColor = secondarySystemBackground
++    @nonobjc public static let cellBackgroundColor = systemBackground
+     
+     @nonobjc public static let carbTintColor = carbs
+     
+diff --git a/LoopUI/Views/GlucoseTrendHUDView.swift b/LoopUI/Views/GlucoseTrendHUDView.swift
+index c31dd812..b4fea65c 100644
+--- a/LoopUI/Views/GlucoseTrendHUDView.swift
++++ b/LoopUI/Views/GlucoseTrendHUDView.swift
+@@ -26,7 +26,8 @@ public final class GlucoseTrendHUDView: BaseHUDView {
+     public override func tintColorDidChange() {
+         super.tintColorDidChange()
+         
+-        trendIcon.tintColor = tintColor
++        // TODO: Update tintColor icon is dynamic
++        trendIcon.tintColor = .darkGray
+     }
+     
+     public func setIcon(_ icon: UIImage?) {
+diff --git a/LoopUI/Views/StatusBarHUDView.swift b/LoopUI/Views/StatusBarHUDView.swift
+index 3bd851e2..0f3ab907 100644
+--- a/LoopUI/Views/StatusBarHUDView.swift
++++ b/LoopUI/Views/StatusBarHUDView.swift
+@@ -59,7 +59,7 @@ public class StatusBarHUDView: UIView, NibLoadable {
+             containerView.heightAnchor.constraint(equalTo: heightAnchor),
+         ])
+         
+-        self.backgroundColor = UIColor.secondarySystemBackground
++        self.backgroundColor = UIColor.systemBackground
+     }
+         
+     public func removePumpManagerProvidedView() {

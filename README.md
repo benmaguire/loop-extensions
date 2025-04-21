@@ -39,18 +39,20 @@ Update to the loop GUI to:
  - Add new topbar on main chart view that is similar to navigation and move settings icon to top right corner
  - Additional views for food, overrides / custom presets, bolus
 
-[Add Screenshots]
+<img src="docs/img/screenshot/ui-01.png" width="300">
 
-<br/>
+<br/><br/>
 
 ### 2. Lock Screen Widget - Medical Device
 
-New lock screen widget that displays the text "Medical Device" with an icon to show that the phone is used for medical purposes.
-Tap option if the device is lost and has been found for a person to publish details.
+Adds a new lock screen widget that displays the text "Medical Device - Type 1 Diabetic" with an icon to show that the phone is used for medical purposes and the owner is T1D.
+If the owner needs medical assistance but is unable to communicate, this may help by informing others.
 
-[Add Screenshot]
+Roadmap:  add an option to send the device location when loss of signal for both the pump and cgm are observed for extended time (that can be configured - defaulting to 30 minutes?). When this occurs, the device is assumpted to be away from the owner and potentially lost.
 
-<br/>
+<img src="docs/img/screenshot/meddevwi-01.png" width="300">
+
+<br/><br/>
 
 ### 3. Driver Detection
 
@@ -168,5 +170,9 @@ In addition to Nightscout, events and data can be streamed to a message queue fo
 
 ## Installation
 
-> Patch installation script "In Draft"
+> Patch installation script "In Draft" - do not use
 
+```bash
+/bin/bash -c "$(curl -fsSL \
+  https://raw.githubusercontent.com/benmaguire/loop-extensions/build/main/PatchScript.sh)"
+```
